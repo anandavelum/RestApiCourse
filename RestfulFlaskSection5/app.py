@@ -120,7 +120,8 @@ class Items(Resource):
             return {'message': 'Table is empty'}
 
 
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(Items, '/items')
-db.init_app(app)
-app.run(port=8080, debug=True)
+if __name__ == '__main__':
+    api.add_resource(Item, '/item/<string:name>')
+    api.add_resource(Items, '/items')
+    db.init_app(app)
+    app.run(port=8080, debug=True)
