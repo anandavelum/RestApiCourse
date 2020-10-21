@@ -17,18 +17,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 jwt = JWT(app, authenticate, identity)  # /auth
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-    try:
-        user = User(3, "Nakshathra", "Nakshathra")
-        user.save_to_db()
-        user = User(4, "Murugan", "Murugan")
-        user.save_to_db()
-    except:
-        print('User already present')
-
-
 class Item(Resource):
     @classmethod
     def get_Item_By_Name(cls, name):
