@@ -107,9 +107,9 @@ class Items(Resource):
         else:
             return {'message': 'Table is empty'}
 
-
-if __name__ == '__main__':
     api.add_resource(Item, '/item/<string:name>')
     api.add_resource(Items, '/items')
+
+if __name__ == '__main__':
     db.init_app(app)
     app.run(port=8080, debug=True)
