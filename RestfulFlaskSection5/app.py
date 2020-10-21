@@ -4,7 +4,6 @@ from flask import Flask, jsonify, request
 from flask_restful import Api, Resource, reqparse
 from flask_jwt import JWT, jwt_required
 from security import authenticate, identity
-from db import db
 from user import User
 import sqlite3
 
@@ -107,9 +106,12 @@ class Items(Resource):
         else:
             return {'message': 'Table is empty'}
 
-    api.add_resource(Item, '/item/<string:name>')
-    api.add_resource(Items, '/items')
+
+api.add_resource(Item, '/item/<string:name>')
+api.add_resource(Items, '/items')
 
 if __name__ == '__main__':
+    from db import db
+
     db.init_app(app)
     app.run(port=8080, debug=True)
