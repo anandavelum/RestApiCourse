@@ -1,5 +1,4 @@
-import string
-
+import os
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource, reqparse
 from flask_jwt import JWT, jwt_required
@@ -10,7 +9,9 @@ import sqlite3
 app = Flask(__name__)
 api = Api(app)
 app.secret_key = "Aani"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# if environment variable is not found then sqllite value passed as second argument will be used as default
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 jwt = JWT(app, authenticate, identity)  # /auth
