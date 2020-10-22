@@ -9,9 +9,12 @@ import sqlite3
 app = Flask(__name__)
 api = Api(app)
 app.secret_key = "Aani"
-# if environment variable is not found then sqllite value passed as second argument will be used as default
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+# Heroku changes
+# if environment variable is not found then sqllite value passed as second argument will be used as default
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 jwt = JWT(app, authenticate, identity)  # /auth
